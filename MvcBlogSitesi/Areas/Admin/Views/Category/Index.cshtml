@@ -6,6 +6,7 @@
 <link href="~/Areas/Admin/Content/css/dataTables.bootstrap.css" rel="stylesheet" />
 <script src="~/Scripts/jquery.dataTables.min.js"></script>
 <script src="~/Scripts/dataTables.bootstrap.min.js"></script>
+<script src="~/Scripts/custom/deleteRecordTable.js"></script>
 
 @model IEnumerable<MvcBlogSitesi.Areas.Admin.Models.DTO.CategoryVM>
 
@@ -35,9 +36,9 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Kategori Adı</th>
+                                <th>Kategori</th>
                                 <th>Açıklama</th>
-                                <th colspan="2">İşlemler</th>
+                                <th>İşlemler</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,18 +47,24 @@
                             <tr id="a_@item.ID">
                                 <td>@item.ID</td>
                                 <td>@item.Name</td>
-                                <td>@item.Description</td>
-                                <td><a href="/Admin/Category/UpdateCategory/@item.ID">Güncelle</a></td>
-                                <td><a href="#" onclick="Delete(@item.ID)"><i class="fa fa-fw fa-remove" style="cursor:pointer"></i></a></td>
+                                <td>@item.Description</td>                                                              
+                                <td>
+                                    <a class="btn btn-success" style="cursor:pointer" href="/Admin/Category/UpdateCategory/@item.ID">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </a>
+                                    <a class="btn btn-danger" href="#" onclick="Delete('/Admin/Category/DeleteCategory/',@item.ID)" aria-label="Delete" style="cursor:pointer">
+                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    </a>                                      
+                                </td>
                             </tr>
                             }                            
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th>#</th>
-                                <th>Kategori Adı</th>
+                                <th>Kategori</th>
                                 <th>Açıklama</th>
-                                <th colspan="2">İşlemler</th>
+                                <th>İşlemler</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -72,22 +79,6 @@
 </section>
 <!-- /.content -->
 
-
-
-<script>
-    function Delete(id) {
-        console.log("gelen id " + id);
-        $.ajax({
-            url: "/Admin/Category/DeleteCategory/" + id,
-            //data:id,
-            type: "POST",
-            success: function (result) {
-                $("#a_" + id).fadeOut();
-            }
-        });
-    }
-
-</script>
 <script>
   $(function () {
     //$("#example1").DataTable();

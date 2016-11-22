@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "AddBlogPost";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/messages_tr.min.js"></script>
+
+<section class="content-header">
+    <h1>
+        Blog Post Ekleme İşlemi
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Forms</a></li>
+        <li class="active">General Elements</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+
+            @Html.Partial("/Areas/Admin/Views/Shared/Partial/FormMessagesPart.cshtml")
+
+            @Html.Partial("Partial/BlogPostForm")
+            
+        </div>
+    </div>
+</section>
+

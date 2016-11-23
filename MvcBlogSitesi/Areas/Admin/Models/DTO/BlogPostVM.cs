@@ -14,6 +14,8 @@ namespace MvcBlogSitesi.Areas.Admin.Models.DTO
         [Required]
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
+        [Display(Name ="Resim")]
+        public HttpPostedFileBase PostImage { get; set; }
         public IEnumerable<SelectListItem> drpCategories { get; set; }
     }
 }

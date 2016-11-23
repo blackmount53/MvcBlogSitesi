@@ -11,7 +11,12 @@ namespace MvcBlogSitesi.App_Start
 
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/admin/layout").Include(
+            bundles.Add(new StyleBundle("~/bundles/admincss").Include(
+                "~/Areas/Admin/Content/css/AdminLTE.min.css",
+                "~/Areas/Admin/Content/css/_all-skins.min.css"
+                ));
+
+            bundles.Add(new ScriptBundle("~/bundles/adminjs").Include(
                "~/Scripts/jquery-2.2.3.min.js",
                "~/Scripts/bootstrap.min.js",
                "~/Scripts/jquery.slimscroll.min.js",
@@ -19,6 +24,8 @@ namespace MvcBlogSitesi.App_Start
                "~/Scripts/app.min.js",
                "~/Scripts/demo.js"
             ));
+
+            BundleTable.EnableOptimizations = true;
         }
 
     }

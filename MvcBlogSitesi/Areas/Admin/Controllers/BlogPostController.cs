@@ -3,6 +3,7 @@ using MvcBlogSitesi.Areas.Admin.Models.Services.HTMLDataSourceService;
 using MvcBlogSitesi.Models.ORM.Entity;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -50,6 +51,23 @@ namespace MvcBlogSitesi.Areas.Admin.Controllers
                 blogpost.CategoryID = model.CategoryID;
                 blogpost.Content = model.Content;
 
+                foreach (string name in Request.Files)
+                {
+                    model.PostImage = Request.Files[name];
+
+                    string ext = Path.GetExtension(model.PostImage.FileName);
+
+                    if(ext==".jpg" || ext==".jpeg" || ext == "*.png" || ext=="*.gif") { 
+                        string uniqnumber = Guid.NewGuid().ToString().Replace("-", "");
+                        string filename = uniqnumber + model.PostImage.FileName;
+                        string TamYol = "~/Areas/Admin/Content/Site/images/blogpost/" + filename;
+                        //Request.Files[0].SaveAs(Server.MapPath(TamYol));
+                    
+                        model.PostImage.SaveAs(Server.MapPath(TamYol));
+                        blogpost.ImagePath = filename;
+                    }
+                }
+                
                 db.BlogPosts.Add(blogpost);
                 db.SaveChanges();
                 ViewBag.IslemDurum = 1;
